@@ -154,7 +154,9 @@ dist/
 go.work
 
 **/data
+data/
 **/content
+content/
 
 *.swp
 .DS_Store
