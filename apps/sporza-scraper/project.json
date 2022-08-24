@@ -1,0 +1,67 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/sporza-scraper/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/sporza-scraper",
+        "main": "apps/sporza-scraper/src/main.ts",
+        "tsConfig": "apps/sporza-scraper/tsconfig.app.json",
+        "assets": [
+          "apps/sporza-scraper/src/assets"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/sporza-scraper/src/environments/environment.ts",
+              "with": "apps/sporza-scraper/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "sporza-scraper:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "sporza-scraper:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/sporza-scraper/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/apps/sporza-scraper"
+      ],
+      "options": {
+        "jestConfig": "apps/sporza-scraper/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
