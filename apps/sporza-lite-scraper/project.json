@@ -11,34 +11,13 @@
       "options": {
         "outputPath": "dist/apps/sporza-lite-scraper",
         "main": "apps/sporza-lite-scraper/src/main.ts",
-        "tsConfig": "apps/sporza-lite-scraper/tsconfig.app.json",
-        "assets": [
-          "apps/sporza-lite-scraper/src/assets"
-        ]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/sporza-lite-scraper/src/environments/environment.ts",
-              "with": "apps/sporza-lite-scraper/src/environments/environment.prod.ts"
-            }
-          ]
-        }
+        "tsConfig": "apps/sporza-lite-scraper/tsconfig.app.json"
       }
     },
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
         "buildTarget": "sporza-lite-scraper:build"
-      },
-      "configurations": {
-        "production": {
-          "buildTarget": "sporza-lite-scraper:build:production"
-        }
       }
     },
     "lint": {
@@ -50,16 +29,6 @@
         "lintFilePatterns": [
           "apps/sporza-lite-scraper/**/*.ts"
         ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/sporza-lite-scraper"
-      ],
-      "options": {
-        "jestConfig": "apps/sporza-lite-scraper/jest.config.ts",
-        "passWithNoTests": true
       }
     }
   },
