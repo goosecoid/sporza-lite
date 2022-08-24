@@ -1,67 +1,21 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "root": "apps/sporza-ss",
   "sourceRoot": "apps/sporza-ss/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/apps/sporza-ss",
-        "main": "apps/sporza-ss/src/main.ts",
-        "tsConfig": "apps/sporza-ss/tsconfig.app.json",
-        "assets": [
-          "apps/sporza-ss/src/assets"
-        ]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/sporza-ss/src/environments/environment.ts",
-              "with": "apps/sporza-ss/src/environments/environment.prod.ts"
-            }
-          ]
-        }
+        "command": "go build -o='../../dist/apps/sporza-ss/' ./src/main.go",
+        "cwd": "apps/sporza-ss"
       }
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "sporza-ss:build"
-      },
-      "configurations": {
-        "production": {
-          "buildTarget": "sporza-ss:build:production"
-        }
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "apps/sporza-ss/**/*.ts"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/sporza-ss"
-      ],
-      "options": {
-        "jestConfig": "apps/sporza-ss/jest.config.ts",
-        "passWithNoTests": true
+        "command": "go run ./src/main.go",
+        "cwd": "apps/sporza-ss"
       }
     }
-  },
-  "tags": []
+  }
 }
