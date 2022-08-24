@@ -1,0 +1,3 @@
+[submodule "apps/sporza-ss/sporza-lite/themes/terminal"]
+	path = apps/sporza-ss/sporza-lite/themes/terminal
+	url = https://github.com/panr/hugo-theme-terminal.git
