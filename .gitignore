@@ -152,3 +152,9 @@ dist/
 
 # Go workspace file
 go.work
+
+**/data
+**/content
+
+*.swp
+.DS_Store

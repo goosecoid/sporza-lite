@@ -19,7 +19,7 @@ theme = "minimal"
     weight = 2
 
 [[menu.main]]
-    url = "/post/"
+    url = "/posts/"
     name = "Posts"
     weight = 3
 

@@ -18,8 +18,8 @@ const getArticles = async (): Promise<void> => {
 
     let articles: Record<string, Article> = {}
 
-    if (existsSync('articles.json')) {
-        const stringifiedArticles = readFileSync('articles.json', { encoding: 'utf8' })
+    if (existsSync('../../../sporza-lite-static/data/articles.json')) {
+        const stringifiedArticles = readFileSync('../../../sporza-lite-static/data/articles.json', { encoding: 'utf8' })
         articles = JSON.parse(stringifiedArticles)
     }
 
@@ -40,7 +40,7 @@ const getArticles = async (): Promise<void> => {
     await page.close()
     await browser.close();
 
-    writeFileSync('articles.json', JSON.stringify(articles), { encoding: 'utf8' })
+    writeFileSync('../../../sporza-lite-static/data/articles.json', JSON.stringify(articles), { encoding: 'utf8' })
 }
 
 export default getArticles;
