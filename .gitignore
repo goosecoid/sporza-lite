@@ -157,6 +157,8 @@ go.work
 data/
 **/content
 content/
+resources/
+**/resources
 
 *.swp
 .DS_Store
