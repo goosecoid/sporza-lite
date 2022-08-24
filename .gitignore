@@ -159,6 +159,8 @@ data/
 content/
 resources/
 **/resources
+public/
+**/public
 
 *.swp
 .DS_Store
