@@ -39,29 +39,42 @@ func main() {
 	log.Println("Generating html files")
 	count := 1
 	for key, article := range articles {
-		log.Printf("Creating and writing file (%d/%d)", count, len(articles))
-		frontMatter := []string{
-			"---",
-			fmt.Sprintf(`title: '%s'`, article.Title),
-			fmt.Sprintf("date: %s", time.Now().UTC().String()),
-			"draft: true", fmt.Sprintf("key: %s", key),
-			"---",
-		}
-		file, err := os.OpenFile(fmt.Sprintf("content/posts/%s.html", key), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-		if err != nil {
-			log.Fatalf("Error creating file: %v", err)
-		}
-		writer := bufio.NewWriter(file)
-		for _, string := range frontMatter {
-			_, err := writer.WriteString(string + "\n")
-			if err != nil {
-				log.Fatalf("Error writing to file %v", err)
+		if len(article.Title) == 0 {
+			log.Println("No title found or is empty, skipping...")
+		} else {
+			log.Printf("Creating and writing file (%d/%d)", count, len(articles))
+			frontMatter := []string{
+				"---",
+				fmt.Sprintf(`title: '%s'`, article.Title),
+				fmt.Sprintf("date: %s", time.Now().UTC().String()),
+				"draft: true", fmt.Sprintf("key: %s", key),
+				"---",
 			}
+			paths := []string{"content", "content/posts"}
+			for _, path := range paths {
+				if _, err := os.Stat(path); err != nil {
+					err := os.Mkdir(path, os.ModePerm)
+					if err != nil {
+						log.Fatalf("Error creating %s directory: %v", path, err)
+					}
+				}
+			}
+			file, err := os.OpenFile(fmt.Sprintf("content/posts/%s.html", key), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+			if err != nil {
+				log.Fatalf("Error creating file: %v", err)
+			}
+			writer := bufio.NewWriter(file)
+			for _, string := range frontMatter {
+				_, err := writer.WriteString(string + "\n")
+				if err != nil {
+					log.Fatalf("Error writing to file %v", err)
+				}
+			}
+			writer.Flush()
+			file.Close()
+			log.Println("File created successfully")
+			count++
 		}
-		writer.Flush()
-		file.Close()
-		log.Println("File created successfully")
-		count++
 	}
 	log.Println("Finished")
 }

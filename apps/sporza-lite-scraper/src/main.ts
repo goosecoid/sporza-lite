@@ -1,4 +1,3 @@
 import getArticles from './app/scraper'
 
-getArticles()
-    .finally(() => console.log("\nDone !"))
+getArticles().then(() => console.log("Process terminated. Exiting...\n"))
